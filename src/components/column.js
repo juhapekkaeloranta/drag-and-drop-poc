@@ -20,12 +20,13 @@ const Tasklist = props => {
 const Column = props => {
   const { id } = props
 
-  const { title, tasks_fk } = useSelector(state => selectors.getColumn(id)(state))
+  const column = useSelector(state => selectors.getColumn(id)(state))
+  const taskOrder = useSelector(state => selectors.getTaskOrder(id)(state))
 
   return (
     <div key={id} id={id} className='bordered'>
       <div>
-        {title}
+        {column.title}
       </div>
       <Droppable
         droppableId={id}
@@ -35,7 +36,7 @@ const Column = props => {
             innerRef={provided.innerRef}
             provided={provided}
           >
-          {tasks_fk.map((taskId, index) => 
+          {taskOrder.map((taskId, index) => 
             <Task key={taskId} id={taskId} index={index}/>
           )}
           {provided.placeholder}

@@ -3,9 +3,10 @@ import Column from './column';
 import { DragDropContext } from 'react-beautiful-dnd'
 import { useSelector, useDispatch } from 'react-redux';
 import { moveTask } from '../actions/actions'
+import { getColumnOrder } from '../selectors/selectors'
 
 const App = () => {
-  const state = useSelector(state => state)
+  const columnOrder = useSelector(getColumnOrder)
   const dispatch = useDispatch()
 
   const handleDragEnd = result => {
@@ -29,12 +30,10 @@ const App = () => {
       onDragEnd={handleDragEnd}
     >
       <div>
-      {state.columnOrder.map(columnId => (
+      {columnOrder.map(columnId => (
         <Column
-          key={state.columns[columnId].id}
-          id={state.columns[columnId].id}
-          title={state.columns[columnId].id}
-          tasks_fk={state.columns[columnId].tasks_fk}
+          key={columnId}
+          id={columnId}
         />
       ))}
       </div>
