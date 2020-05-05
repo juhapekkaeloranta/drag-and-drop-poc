@@ -9,10 +9,15 @@ const initialState = {
     'column-1': {
       id: 'column-1',
       title: 'Todo',
-      tasks_fk: ['task-2', 'task-1', 'task-3', 'task-4']
+      tasks_fk: ['task-2', 'task-1', 'task-3']
+    },
+    'column-2': {
+      id: 'column-2',
+      title: 'Doing',
+      tasks_fk: ['task-4']
     }
   },
-  columnOrder: ['column-1']
+  columnOrder: ['column-1', 'column-2']
 }
 
 const reducer = (state = initialState, action) => {
@@ -36,17 +41,17 @@ const reducer = (state = initialState, action) => {
       }
       
       const toArray = [
-        ...removed.columns[action.from.droppableId]['tasks_fk'].slice(0, action.to.index),
+        ...removed.columns[action.to.droppableId]['tasks_fk'].slice(0, action.to.index),
         action.id,
-        ...removed.columns[action.from.droppableId]['tasks_fk'].slice(action.to.index)
-      ]
+        ...removed.columns[action.to.droppableId]['tasks_fk'].slice(action.to.index)
+      ]   
 
       const added = {
         ...removed,
         columns: {
           ...removed.columns,
           [action.to.droppableId]: {
-            ...removed.columns[action.from.droppableId],
+            ...removed.columns[action.to.droppableId],
             tasks_fk: toArray
               
           },

@@ -9,6 +9,8 @@ const App = () => {
   const dispatch = useDispatch()
 
   const handleDragEnd = result => {
+
+    console.log('dragEnd', result)
     
     const { destination, source, draggableId } = result
 
@@ -22,24 +24,24 @@ const App = () => {
     dispatch(moveTask(draggableId, source, destination))
   }
 
-  return state.columnOrder.map(columnId => {
-    const column = state.columns[columnId]
-
-    return (
-      <DragDropContext
-        onDragEnd={handleDragEnd}
-        key={column.id}
-      >
+  return (
+    <DragDropContext
+      onDragEnd={handleDragEnd}
+    >
+      <div>
+      {state.columnOrder.map(columnId => (
         <Column
-          key={column.id}
-          id={column.id}
-          title={column.id}
-          tasks_fk={column.tasks_fk}
+          key={state.columns[columnId].id}
+          id={state.columns[columnId].id}
+          title={state.columns[columnId].id}
+          tasks_fk={state.columns[columnId].tasks_fk}
         />
-      </DragDropContext>
-    )
-  })
-  
+      ))}
+      </div>
+    </DragDropContext>
+  )
 }
+
+
 
 export default App
