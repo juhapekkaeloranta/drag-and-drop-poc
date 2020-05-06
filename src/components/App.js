@@ -2,8 +2,8 @@ import React from 'react'
 import Column from './column';
 import { DragDropContext } from 'react-beautiful-dnd'
 import { useSelector, useDispatch } from 'react-redux';
-import { moveTask } from '../actions/actions'
-import { getColumnOrder } from '../selectors/selectors'
+import { moveTask } from '../state/actions'
+import { getColumnOrder } from '../state/selectors'
 
 const App = () => {
   const columnOrder = useSelector(getColumnOrder)

@@ -1,6 +1,6 @@
 import React from 'react'
 import Task from './task'
-import * as selectors from '../selectors/selectors'
+import * as selectors from '../state/selectors'
 import { Droppable } from 'react-beautiful-dnd'
 import { useSelector } from 'react-redux'
 

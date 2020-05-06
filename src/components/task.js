@@ -1,5 +1,5 @@
 import React from 'react';
-import * as selectors from '../selectors/selectors';
+import * as selectors from '../state/selectors';
 import { Draggable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 
