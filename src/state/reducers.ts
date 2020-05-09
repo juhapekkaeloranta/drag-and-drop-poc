@@ -1,8 +1,8 @@
 
-import { initialState } from './schema'
+import { initialState, rootState } from './schema'
 import { removeTask, insertTask } from './actions'
 
-const reducer = (state = initialState, action) => {
+const reducer = (state: rootState = initialState, action: any): rootState => {
   switch (action.type) {
     case 'MOVE-TASK':
       const taskId = action.id
