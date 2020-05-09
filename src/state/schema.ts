@@ -1,3 +1,34 @@
+export interface rootState {
+  tasks: Tasks,
+  columns: Columns,
+  columnOrder: Array<String>,
+  taskPlacement: Array<TaskPlacement>
+}
+
+export interface Task {
+  id: string,
+  content: string
+}
+
+export interface Tasks {
+  [key: string]: Task
+}
+
+export interface Column {
+  id: string,
+  title: string
+}
+
+export interface Columns {
+  [key: string]: Column
+}
+
+export interface TaskPlacement {
+  task: string,
+  column: string,
+  index: number
+}
+
 export const initialState = {
   tasks: {
     'task-1': { id: 'task-1', content: 'Cook the spagetti' },
