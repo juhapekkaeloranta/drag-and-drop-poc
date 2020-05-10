@@ -11,8 +11,8 @@ const reducer = (state: rootState = initialState, action: any): rootState => {
       const toIndex = action.to.index
       const fromIndex = action.from.index
 
-      const removed = reducer(state, removeTask(taskId, fromColumnId, fromIndex))
-      const inserted = reducer(removed, insertTask(taskId, toColumnId, toIndex))
+      const removed = reducer(state, removeTask({ id: taskId, fromColumn: fromColumnId, fromIndex }))
+      const inserted = reducer(removed, insertTask({ id: taskId, toColumn: toColumnId, toIndex: toIndex }))
 
       return {
         ...inserted,

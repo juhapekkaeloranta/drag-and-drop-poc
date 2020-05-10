@@ -22,7 +22,7 @@ const App = () => {
       destination.index === source.index
     ) {return}
 
-    dispatch(moveTask(draggableId, source, destination))
+    dispatch(moveTask({ id: draggableId, from: source, to: destination }))
   }
 
   return (

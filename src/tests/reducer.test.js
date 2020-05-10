@@ -37,5 +37,5 @@ describe('reducer', () => {
   
   it('REMOVE-TASK, last', () => testTaskPlacement(testData.removeTaskTest3))
   
-  it('INSERT-TASK, middle', () => testTaskPlacement(testData.removeTaskTest1))
+  it('INSERT-TASK, middle', () => testTaskPlacement(testData.insertTaskTest1))
 })
