@@ -24,7 +24,7 @@ const reducer = (state: rootState = initialState, action: any): rootState => {
       return {
         ...state,
         taskPlacement: state.taskPlacement
-          .filter(item => item.task !== action.id)
+          .filter(item => item.task !== action.id) //TODO: check that index is correct
           .map(item => item.column === action.fromColumn && item.index > action.fromIndex
             ? { ...item, index: item.index - 1 }
             : item
