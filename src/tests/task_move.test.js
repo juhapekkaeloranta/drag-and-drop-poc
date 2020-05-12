@@ -1,7 +1,9 @@
+
+import { testTaskPlacement } from './common'
 import { initialState } from '../state/schema'
 import * as action from '../state/actions'
 
-export const moveTaskTest1 = {
+const moveTaskTest1 = {
   state: initialState,
   action: action.moveTask({
     id: 'task-1',
@@ -14,7 +16,7 @@ export const moveTaskTest1 = {
   }
 }
 
-export const moveTaskTest2 = {
+const moveTaskTest2 = {
   state: initialState,
   action: action.moveTask({
     id: 'task-1',
@@ -27,7 +29,7 @@ export const moveTaskTest2 = {
   }
 }
 
-export const moveTaskTest3 = {
+const moveTaskTest3 = {
   state: initialState,
   action: action.moveTask({
     id: 'task-1',
@@ -40,7 +42,7 @@ export const moveTaskTest3 = {
   }
 }
 
-export const moveTaskTest4 = {
+const moveTaskTest4 = {
   state: initialState,
   action: action.moveTask({
     id: 'task-1',
@@ -53,54 +55,12 @@ export const moveTaskTest4 = {
   }
 }
 
-export const removeTaskTest1 = {
-  state: initialState,
-  action: action.removeTask({
-    id: 'task-1',
-    fromColumn: 'column-1',
-    fromIndex: 0
-  }),
-  result: {
-    'column-1': ['task-2', 'task-3'],
-    'column-2': ['task-4']
-  }
-}
+describe('reducer', () => {
+  it('MOVE-TASK, same column, up', () => testTaskPlacement(moveTaskTest1))
 
-export const removeTaskTest2 = {
-  state: initialState,
-  action: action.removeTask({
-    id: 'task-2',
-    fromColumn: 'column-1',
-    fromIndex: 1
-  }),
-  result: {
-    'column-1': ['task-1', 'task-3'],
-    'column-2': ['task-4']
-  }
-}
+  it('MOVE-TASK, same column, down', () => testTaskPlacement(moveTaskTest2))
 
-export const removeTaskTest3 = {
-  state: initialState,
-  action: action.removeTask({
-    id: 'task-3',
-    fromColumn: 'column-1',
-    fromIndex: 2
-  }),
-  result: {
-    'column-1': ['task-1', 'task-2'],
-    'column-2': ['task-4']
-  }
-}
-
-export const insertTaskTest1 = {
-  state: initialState,
-  action: action.insertTask({
-    id: "task-5",
-    toColumn: "column-1",
-    toIndex: 1,
-  }),
-  result: {
-    'column-1': ['task-1', 'task-5', 'task-2', 'task-3'],
-    'column-2': ['task-4']
-  }
-}
+  it('MOVE-TASK, another column, top', () => testTaskPlacement(moveTaskTest3))
+  
+  it('MOVE-TASK, another column, bottom', () => testTaskPlacement(moveTaskTest4))
+})
