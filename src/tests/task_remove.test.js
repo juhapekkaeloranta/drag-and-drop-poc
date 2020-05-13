@@ -2,7 +2,7 @@ import { testTaskPlacement } from './common'
 import { initialState } from '../state/schema'
 import * as action from '../state/actions'
 import reducer from '../state/reducers'
-import { getTaskPlacements } from '../state/selectors'
+import { validateState } from '../state/validators'
 
 const removeTaskTest1 = {
   state: initialState,
@@ -66,38 +66,13 @@ const removeTaskTest4 = {
   })
 }
 
-const validateTaskPlacement = (taskPlacement) => {
-  //TODO: this is unreadable, KISS
-  const groupByCol = (groupped, item) => {
-    const tmp = groupped.map(gItem => gItem.column).includes(item.column)
-      ? groupped.map(gItem => {
-          return gItem.column === item.column
-            ? { ...gItem, indexes: gItem.indexes.concat([ item.index ])}
-            : gItem
-        }
-      )   
-      : groupped.concat([ { column: item.column, indexes: [ item.index ] } ])
-    console.log(tmp)
-    return tmp
-  }
-  
-  const isValidIndexArray = (array) => {
-    return array.sort()[0] === 0
-      &&  array[array.length - 1] === array.length - 1
-  }
-
-  return taskPlacement
-    .reduce(groupByCol, [])
-    .reduce((acc, item) => acc && isValidIndexArray(item.indexes), true)
-}
-
 describe('task reducer', () => {
   it('does not mess up indexes', () =>
     expect(
-      validateTaskPlacement(getTaskPlacements(reducer(
+      validateState(reducer(
         removeTaskTest4.state,
         removeTaskTest4.action
-      )))
+      ))
     ).toBe(true)
   )
 })

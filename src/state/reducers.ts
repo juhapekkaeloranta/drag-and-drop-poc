@@ -1,7 +1,7 @@
 
 import { initialState, rootState } from './schema'
 import { removeTask, insertTask } from './actions'
-import { validateStore } from './validators'
+import { validateState } from './validators'
 
 const reducer = (state: rootState = initialState, action: any): rootState => {
   switch (action.type) {
@@ -21,7 +21,7 @@ const reducer = (state: rootState = initialState, action: any): rootState => {
           .sort((a, b) => a.task < b.task ? -1 : 1)
       }
 
-      return validateStore(newState, action)
+      return validateState(newState, action)
         ? newState
         : state
     }
@@ -37,7 +37,7 @@ const reducer = (state: rootState = initialState, action: any): rootState => {
           )
       }
 
-      return validateStore(newState, action)
+      return validateState(newState, action)
         ? newState
         : state
     }
@@ -54,7 +54,7 @@ const reducer = (state: rootState = initialState, action: any): rootState => {
             { task: action.id, column: action.toColumn, index: action.toIndex }
           ])
       }
-      return validateStore(newState, action)
+      return validateState(newState, action)
         ? newState
         : state
     }

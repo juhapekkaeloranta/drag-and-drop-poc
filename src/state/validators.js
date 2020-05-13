@@ -1,27 +1,23 @@
 import { getTaskPlacements } from './selectors'
 
 const validateTaskPlacement = (taskPlacement) => {
-  //TODO: this is unreadable, KISS
-  const groupByCol = (groupped, item) => {
-    const tmp = groupped.map(gItem => gItem.column).includes(item.column)
-      ? groupped.map(gItem => {
-          return gItem.column === item.column
-            ? { ...gItem, indexes: gItem.indexes.concat([ item.index ])}
-            : gItem
-        }
-      )   
-      : groupped.concat([ { column: item.column, indexes: [ item.index ] } ])
-    return tmp
-  }
-  
+  const indexesByColumn = {}
+
+  taskPlacement.forEach(element => {
+    if (!indexesByColumn[element.column]) {
+      indexesByColumn[element.column] = []
+    }
+    indexesByColumn[element.column].push(element.index)
+  })
+
   const isValidIndexArray = (array) => {
     return array.sort()[0] === 0
       &&  array[array.length - 1] === array.length - 1
   }
 
-  return taskPlacement
-    .reduce(groupByCol, [])
-    .reduce((acc, item) => acc && isValidIndexArray(item.indexes), true)
+  return Object.values(indexesByColumn)
+    .map(indexArray => isValidIndexArray(indexArray))
+    .every(validity => validity === true)
 }
 
 const runValidators = (state) => {
@@ -30,7 +26,7 @@ const runValidators = (state) => {
   return isValid
 }
 
-export const validateStore = (newState, action) => {
+export const validateState = (newState, action = '') => {
   if (runValidators(newState)) {
     return true
   } else {
