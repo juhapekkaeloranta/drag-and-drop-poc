@@ -24,3 +24,7 @@ export const getTaskOrder = (columnId: string): Function => {
       .map(item => item.task)
   }
 }
+
+export const getTaskPlacements = (state: rootState): Array<Object> => {
+  return state.taskPlacement
+}

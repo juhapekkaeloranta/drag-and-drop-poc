@@ -1,6 +1,7 @@
 import reducer from '../state/reducers'
 import { getTaskOrder } from '../state/selectors'
 
+//TODO: generalize to all columns
 export const testTaskPlacement = (testData) => {
   expect(
     getTaskOrder('column-1')(reducer(
