@@ -3,7 +3,7 @@ import * as selectors from '../state/selectors';
 import { Draggable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 
-const Container = props => {
+const Task = props => {
   const { content } = props
   const { provided, innerRef } = props;
 
@@ -19,22 +19,22 @@ const Container = props => {
   )
 }
 
-const Task = props => {
+const Container = props => {
   const { id, index } = props
   const { content } = useSelector(selectors.getTask(id))
 
   return (
     <Draggable key={id} draggableId={id} index={index}>
       {(provided) => (
-        <Container
+        <Task
           provided={provided}
           innerRef={provided.innerRef}
           content={content}
         >
-        </Container>
+        </Task>
       )}
     </Draggable>
   )
 }
 
-export default Task
+export default Container

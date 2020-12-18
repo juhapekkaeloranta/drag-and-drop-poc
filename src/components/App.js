@@ -1,12 +1,10 @@
 import React from 'react'
-import Column from './column';
 import { DragDropContext } from 'react-beautiful-dnd'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { moveTask } from '../state/actions'
-import { getColumnOrder } from '../state/selectors'
+import Board from './Board'
 
 const App = () => {
-  const columnOrder = useSelector(getColumnOrder)
   const dispatch = useDispatch()
 
   const handleDragEnd = result => {
@@ -22,24 +20,13 @@ const App = () => {
     dispatch(moveTask({ id: draggableId, from: source, to: destination }))
   }
 
-  //TODO: make more lanes
-
   return (
     <DragDropContext
       onDragEnd={handleDragEnd}
     >
-      <div className={"lane bordered p--half"}>
-      {columnOrder.map(columnId => (
-        <Column
-          key={columnId}
-          id={columnId}
-        />
-      ))}
-      </div>
+      <Board />
     </DragDropContext>
   )
 }
-
-
 
 export default App

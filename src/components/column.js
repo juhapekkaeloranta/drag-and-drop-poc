@@ -1,21 +1,9 @@
 import React from 'react'
-import Task from './task'
+import Task from './Task'
+import Title from './Title'
 import * as selectors from '../state/selectors'
-import { Droppable } from 'react-beautiful-dnd'
+import DroppableWrapper from './dnd/DroppableWrapper'
 import { useSelector } from 'react-redux'
-
-const Tasklist = props => {
-  const { provided, innerRef } = props;
-
-  return (
-    <div
-      ref={innerRef}
-      {...provided.droppableProps}
-    >
-      {props.children}
-    </div>
-  )
-}
 
 const Column = props => {
   const { id } = props
@@ -25,24 +13,12 @@ const Column = props => {
 
   return (
     <div key={id} id={id} className='column bordered m--half p'>
-      <div>
-        {column.title}
-      </div>
-      <Droppable
-        droppableId={id}
-      >
-        {(provided) => (
-          <Tasklist
-            innerRef={provided.innerRef}
-            provided={provided}
-          >
-          {taskOrder.map((taskId, index) => 
-            <Task key={taskId} id={taskId} index={index}/>
-          )}
-          {provided.placeholder}
-        </Tasklist>
+      <Title text={column.title}/>
+      <DroppableWrapper id={id}>
+        {taskOrder.map((taskId, index) => 
+          <Task key={taskId} id={taskId} index={index}/>
         )}
-      </Droppable>
+      </DroppableWrapper>
     </div>
   ) 
 }
