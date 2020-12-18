@@ -9,7 +9,7 @@ const Board = () => {
   return (
     <div>
       {lanes.map(lane => (
-        <Lane id={lane.id}/>
+        <Lane key={lane.id} id={lane.id}/>
       ))}
       </div>
   )

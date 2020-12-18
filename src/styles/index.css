@@ -28,6 +28,14 @@ body {
   margin: 4px;
 }
 
+.droppable {
+  height: calc(100% - 8px);
+}
+
+.droppable > div {
+  height: 100%;
+}
+
 .column {
   width: 200px;
 }
