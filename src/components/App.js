@@ -10,9 +10,6 @@ const App = () => {
   const dispatch = useDispatch()
 
   const handleDragEnd = result => {
-
-    console.log('dragEnd', result)
-    
     const { destination, source, draggableId } = result
 
     if (!destination) {return}
@@ -25,11 +22,13 @@ const App = () => {
     dispatch(moveTask({ id: draggableId, from: source, to: destination }))
   }
 
+  //TODO: make more lanes
+
   return (
     <DragDropContext
       onDragEnd={handleDragEnd}
     >
-      <div>
+      <div className={"lane bordered p--half"}>
       {columnOrder.map(columnId => (
         <Column
           key={columnId}

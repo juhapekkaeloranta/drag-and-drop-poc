@@ -9,7 +9,7 @@ const Container = props => {
 
   return (
     <div
-      className='bordered'
+      className='task--styling bordered mt p'
       ref={innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}

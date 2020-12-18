@@ -24,7 +24,7 @@ const Column = props => {
   const taskOrder = useSelector(state => selectors.getTaskOrder(id)(state))
 
   return (
-    <div key={id} id={id} className='bordered'>
+    <div key={id} id={id} className='column bordered m--half p'>
       <div>
         {column.title}
       </div>
