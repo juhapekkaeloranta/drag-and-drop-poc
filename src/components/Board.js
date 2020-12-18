@@ -1,20 +1,15 @@
 import React from "react"
-import Column from "./Column"
 import { useSelector } from "react-redux"
-import { getColumnOrder } from '../state/selectors'
+import { getLanes } from '../state/selectors'
+import Lane from './Lane'
 
 const Board = () => {
-  const columnOrder = useSelector(getColumnOrder)
-
-  //TODO: make more lanes
+  const lanes = useSelector(getLanes("board-1"))
 
   return (
-    <div className={"lane bordered p--half"}>
-      {columnOrder.map(columnId => (
-        <Column
-          key={columnId}
-          id={columnId}
-        />
+    <div>
+      {lanes.map(lane => (
+        <Lane id={lane.id}/>
       ))}
       </div>
   )
