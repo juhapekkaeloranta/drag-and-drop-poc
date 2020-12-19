@@ -3,6 +3,7 @@ import * as selectors from '../state/selectors';
 import { Draggable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 
+//TODO: separate gradding from Task?
 const Task = props => {
   const { content } = props
   const { provided, innerRef } = props;
@@ -19,6 +20,7 @@ const Task = props => {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const Container = props => {
   const { id, index } = props
   const { content } = useSelector(selectors.getTask(id))

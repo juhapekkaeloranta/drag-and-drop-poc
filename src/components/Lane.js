@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import { getColumns } from '../state/selectors'
 import Column from './Column'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const Lane = props => {
   const columns = useSelector(getColumns(props.id))
 

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { moveTask } from '../state/actions'
 import Board from './Board'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const App = () => {
   const dispatch = useDispatch()
 
@@ -17,7 +18,13 @@ const App = () => {
       destination.index === source.index
     ) {return}
 
-    dispatch(moveTask({ id: draggableId, from: source, to: destination }))
+    dispatch(moveTask(
+      draggableId,
+      source.droppableId,
+      source.index,
+      destination.droppableId,
+      destination.index
+    ))
   }
 
   return (

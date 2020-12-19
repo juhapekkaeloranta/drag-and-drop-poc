@@ -1,6 +1,6 @@
 
-import { initialState } from '../state/schema'
-import { validateState } from '../state/validators'
+import { initialState } from './schema'
+import { validateState } from './validators'
 
 // Negative index
 export const invalidTaskPlacement1 = [
