@@ -26,11 +26,11 @@ const runValidators = (state: rootState) => {
   return isValid
 }
 
-export const validateState = (newState: rootState, action: string): boolean => {
+export const validateState = (newState: rootState, actionName = ""): boolean => {
   if (runValidators(newState)) {
     return true
   } else {
-    console.log('ERROR! Invalid state detected - action cancelled. Action:', action)
+    console.log('ERROR! Invalid state detected - action cancelled. Action:', actionName)
     return false
   }
 }

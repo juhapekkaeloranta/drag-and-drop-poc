@@ -44,28 +44,28 @@ describe('state validator', () => {
   it('rejects negative indexes', () =>
     expect(
       validateState(
-        { ...initialState, taskPlacement: invalidTaskPlacement1 }
+        { ...initialState, tasks: invalidTaskPlacement1 }
     )).toBe(false)
   )
 
   it('rejects index with gaps', () =>
     expect(
       validateState(
-        { ...initialState, taskPlacement: invalidTaskPlacement2 }
+        { ...initialState, tasks: invalidTaskPlacement2 }
     )).toBe(false)
   )
 
   it('rejects index with duplicates', () =>
     expect(
       validateState(
-        { ...initialState, taskPlacement: invalidTaskPlacement3 }
+        { ...initialState, tasks: invalidTaskPlacement3 }
     )).toBe(false)
   )
 
   it('rejects an index that does not start from 0', () =>
     expect(
       validateState(
-        { ...initialState, taskPlacement: invalidTaskPlacement4 }
+        { ...initialState, tasks: invalidTaskPlacement4 }
     )).toBe(false)
   )
 })
