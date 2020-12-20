@@ -31,7 +31,7 @@ const App = () => {
     <DragDropContext
       onDragEnd={handleDragEnd}
     >
-      <Board />
+      <Board id={'board-1'} />
     </DragDropContext>
   )
 }

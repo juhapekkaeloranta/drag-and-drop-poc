@@ -1,41 +1,24 @@
 import React from 'react';
-import * as selectors from '../state/selectors';
-import { Draggable } from 'react-beautiful-dnd';
-import { useSelector } from 'react-redux';
+import DraggableWrapper from './dnd/DraggableWrapper'
 
-//TODO: separate gradding from Task?
-const Task = props => {
-  const { content } = props
-  const { provided, innerRef } = props;
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const Container = ({ task }) => {
+  const { id, index } = task
 
   return (
-    <div
-      className='task--styling bordered mt p'
-      ref={innerRef}
-      {...provided.draggableProps}
-      {...provided.dragHandleProps}
-    >
-      {content}
-    </div>
+    <DraggableWrapper key={id} id={id} index={index} className={'mt'}>
+      <Task task={task} />
+    </DraggableWrapper>
   )
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const Container = props => {
-  const { id, index } = props
-  const { content } = useSelector(selectors.getTask(id))
+const Task = ({ task }) => {
+  const { content } = task
 
   return (
-    <Draggable key={id} draggableId={id} index={index}>
-      {(provided) => (
-        <Task
-          provided={provided}
-          innerRef={provided.innerRef}
-          content={content}
-        >
-        </Task>
-      )}
-    </Draggable>
+    <div className='task--styling bordered p'>
+      {content}
+    </div>
   )
 }
 
