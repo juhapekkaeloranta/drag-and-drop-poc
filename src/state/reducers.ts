@@ -2,7 +2,7 @@ import { initialState, rootState } from './schema'
 import { MoveTask } from './actions'
 import { validateState } from './validators'
 
-type actions =  MoveTask
+type actions = MoveTask
 
 const reducer = (state: rootState = initialState, action: actions): rootState => {
   switch (action.type) {
@@ -14,21 +14,22 @@ const reducer = (state: rootState = initialState, action: actions): rootState =>
       const newState = {
         ...state,
         tasks: state.tasks
-          .map(task => task.column === action.toColumn && task.index >= action.toIndex
-            ? { ...task, index: task.index + 1 }
-            : task
-          )
+          //fixing source column
           .map(task => task.column === action.fromColumn && task.index > action.fromIndex
             ? { ...task, index: task.index - 1 }
             : task
           )
+          //fixing target column
+          .map(task => task.column === action.toColumn && task.index >= action.toIndex
+            ? { ...task, index: task.index + 1 }
+            : task
+          )
+          //actually moving the task
           .map(task => task.id === action.taskId
             ? { ...task, column: action.toColumn, index: action.toIndex }
             : task
           )
       }
-
-      console.log("newState", newState)
 
       return validateState(newState, action.type)
         ? newState
